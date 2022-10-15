@@ -65,8 +65,11 @@ def read_and_convert_fasta_files(
         aas[aa[0]] = aa[1]
         nts[nt[0]] = nt[1]
 
-    aas = ((k, v) for k, v in aas.items())
-    nts = ((k, v) for k, v in nts.items())
+    aas_keys = list(aas.keys())
+    nts_keys = list(nts.keys())
+
+    aas = [(k, v) for k, v in aas.items() if k in nts_keys]
+    nts = [(k, v) for k, v in nts.items() if k in aas_keys]
 
     return (aas, nts)
 
