@@ -1,0 +1,3 @@
+pro2codon
+biopython
+requests

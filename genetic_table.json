@@ -1,0 +1,2939 @@
+[
+    {
+        "table_id": "1",
+        "F": [
+            "TTT",
+            "TTC"
+        ],
+        "L": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG"
+        ],
+        "S": [
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC"
+        ],
+        "Y": [
+            "TAT",
+            "TAC"
+        ],
+        "*": [
+            "TAA",
+            "TAG",
+            "TGA"
+        ],
+        "C": [
+            "TGT",
+            "TGC"
+        ],
+        "W": [
+            "TGG"
+        ],
+        "P": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H": [
+            "CAT",
+            "CAC"
+        ],
+        "Q": [
+            "CAA",
+            "CAG"
+        ],
+        "R": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG"
+        ],
+        "I": [
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "M": [
+            "ATG"
+        ],
+        "T": [
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "N": [
+            "AAT",
+            "AAC"
+        ],
+        "K": [
+            "AAA",
+            "AAG"
+        ],
+        "V": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "A": [
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "D": [
+            "GAT",
+            "GAC"
+        ],
+        "E": [
+            "GAA",
+            "GAG"
+        ],
+        "G": [
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ]
+    },
+    {
+        "table_id": "2",
+        "F": [
+            "TTT",
+            "TTC"
+        ],
+        "L": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG"
+        ],
+        "S": [
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC"
+        ],
+        "Y": [
+            "TAT",
+            "TAC"
+        ],
+        "*": [
+            "TAA",
+            "TAG",
+            "AGA",
+            "AGG"
+        ],
+        "C": [
+            "TGT",
+            "TGC"
+        ],
+        "W": [
+            "TGA",
+            "TGG"
+        ],
+        "P": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H": [
+            "CAT",
+            "CAC"
+        ],
+        "Q": [
+            "CAA",
+            "CAG"
+        ],
+        "R": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG"
+        ],
+        "I": [
+            "ATT",
+            "ATC"
+        ],
+        "M": [
+            "ATA",
+            "ATG"
+        ],
+        "T": [
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "N": [
+            "AAT",
+            "AAC"
+        ],
+        "K": [
+            "AAA",
+            "AAG"
+        ],
+        "V": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "A": [
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "D": [
+            "GAT",
+            "GAC"
+        ],
+        "E": [
+            "GAA",
+            "GAG"
+        ],
+        "G": [
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ]
+    },
+    {
+        "table_id": "3",
+        "F": [
+            "TTT",
+            "TTC"
+        ],
+        "L": [
+            "TTA",
+            "TTG"
+        ],
+        "S": [
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC"
+        ],
+        "Y": [
+            "TAT",
+            "TAC"
+        ],
+        "*": [
+            "TAA",
+            "TAG"
+        ],
+        "C": [
+            "TGT",
+            "TGC"
+        ],
+        "W": [
+            "TGA",
+            "TGG"
+        ],
+        "T": [
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "P": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H": [
+            "CAT",
+            "CAC"
+        ],
+        "Q": [
+            "CAA",
+            "CAG"
+        ],
+        "R": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG"
+        ],
+        "I": [
+            "ATT",
+            "ATC"
+        ],
+        "M": [
+            "ATA",
+            "ATG"
+        ],
+        "N": [
+            "AAT",
+            "AAC"
+        ],
+        "K": [
+            "AAA",
+            "AAG"
+        ],
+        "V": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "A": [
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "D": [
+            "GAT",
+            "GAC"
+        ],
+        "E": [
+            "GAA",
+            "GAG"
+        ],
+        "G": [
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ]
+    },
+    {
+        "table_id": "4",
+        "F": [
+            "TTT",
+            "TTC"
+        ],
+        "L": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG"
+        ],
+        "S": [
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC"
+        ],
+        "Y": [
+            "TAT",
+            "TAC"
+        ],
+        "*": [
+            "TAA",
+            "TAG"
+        ],
+        "C": [
+            "TGT",
+            "TGC"
+        ],
+        "W": [
+            "TGA",
+            "TGG"
+        ],
+        "P": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H": [
+            "CAT",
+            "CAC"
+        ],
+        "Q": [
+            "CAA",
+            "CAG"
+        ],
+        "R": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG"
+        ],
+        "I": [
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "M": [
+            "ATG"
+        ],
+        "T": [
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "N": [
+            "AAT",
+            "AAC"
+        ],
+        "K": [
+            "AAA",
+            "AAG"
+        ],
+        "V": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "A": [
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "D": [
+            "GAT",
+            "GAC"
+        ],
+        "E": [
+            "GAA",
+            "GAG"
+        ],
+        "G": [
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ]
+    },
+    {
+        "table_id": "5",
+        "F": [
+            "TTT",
+            "TTC"
+        ],
+        "L": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG"
+        ],
+        "S": [
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "AGA",
+            "AGG"
+        ],
+        "Y": [
+            "TAT",
+            "TAC"
+        ],
+        "*": [
+            "TAA",
+            "TAG"
+        ],
+        "C": [
+            "TGT",
+            "TGC"
+        ],
+        "W": [
+            "TGA",
+            "TGG"
+        ],
+        "P": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H": [
+            "CAT",
+            "CAC"
+        ],
+        "Q": [
+            "CAA",
+            "CAG"
+        ],
+        "R": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG"
+        ],
+        "I": [
+            "ATT",
+            "ATC"
+        ],
+        "M": [
+            "ATA",
+            "ATG"
+        ],
+        "T": [
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "N": [
+            "AAT",
+            "AAC"
+        ],
+        "K": [
+            "AAA",
+            "AAG"
+        ],
+        "V": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "A": [
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "D": [
+            "GAT",
+            "GAC"
+        ],
+        "E": [
+            "GAA",
+            "GAG"
+        ],
+        "G": [
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ]
+    },
+    {
+        "table_id": "6",
+        "F": [
+            "TTT",
+            "TTC"
+        ],
+        "L": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG"
+        ],
+        "S": [
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC"
+        ],
+        "Y": [
+            "TAT",
+            "TAC"
+        ],
+        "Q": [
+            "TAA",
+            "TAG",
+            "CAA",
+            "CAG"
+        ],
+        "C": [
+            "TGT",
+            "TGC"
+        ],
+        "*": [
+            "TGA"
+        ],
+        "W": [
+            "TGG"
+        ],
+        "P": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H": [
+            "CAT",
+            "CAC"
+        ],
+        "R": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG"
+        ],
+        "I": [
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "M": [
+            "ATG"
+        ],
+        "T": [
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "N": [
+            "AAT",
+            "AAC"
+        ],
+        "K": [
+            "AAA",
+            "AAG"
+        ],
+        "V": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "A": [
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "D": [
+            "GAT",
+            "GAC"
+        ],
+        "E": [
+            "GAA",
+            "GAG"
+        ],
+        "G": [
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ]
+    },
+    {
+        "table_id": "9",
+        "F": [
+            "TTT",
+            "TTC"
+        ],
+        "L": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG"
+        ],
+        "S": [
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "AGA",
+            "AGG"
+        ],
+        "Y": [
+            "TAT",
+            "TAC"
+        ],
+        "*": [
+            "TAA",
+            "TAG"
+        ],
+        "C": [
+            "TGT",
+            "TGC"
+        ],
+        "W": [
+            "TGA",
+            "TGG"
+        ],
+        "P": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H": [
+            "CAT",
+            "CAC"
+        ],
+        "Q": [
+            "CAA",
+            "CAG"
+        ],
+        "R": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG"
+        ],
+        "I": [
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "M": [
+            "ATG"
+        ],
+        "T": [
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "N": [
+            "AAT",
+            "AAC",
+            "AAA"
+        ],
+        "K": [
+            "AAG"
+        ],
+        "V": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "A": [
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "D": [
+            "GAT",
+            "GAC"
+        ],
+        "E": [
+            "GAA",
+            "GAG"
+        ],
+        "G": [
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ]
+    },
+    {
+        "table_id": "10",
+        "F": [
+            "TTT",
+            "TTC"
+        ],
+        "L": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG"
+        ],
+        "S": [
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC"
+        ],
+        "Y": [
+            "TAT",
+            "TAC"
+        ],
+        "*": [
+            "TAA",
+            "TAG"
+        ],
+        "C": [
+            "TGT",
+            "TGC",
+            "TGA"
+        ],
+        "W": [
+            "TGG"
+        ],
+        "P": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H": [
+            "CAT",
+            "CAC"
+        ],
+        "Q": [
+            "CAA",
+            "CAG"
+        ],
+        "R": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG"
+        ],
+        "I": [
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "M": [
+            "ATG"
+        ],
+        "T": [
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "N": [
+            "AAT",
+            "AAC"
+        ],
+        "K": [
+            "AAA",
+            "AAG"
+        ],
+        "V": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "A": [
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "D": [
+            "GAT",
+            "GAC"
+        ],
+        "E": [
+            "GAA",
+            "GAG"
+        ],
+        "G": [
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ]
+    },
+    {
+        "table_id": "11",
+        "F": [
+            "TTT",
+            "TTC"
+        ],
+        "L": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG"
+        ],
+        "S": [
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC"
+        ],
+        "Y": [
+            "TAT",
+            "TAC"
+        ],
+        "*": [
+            "TAA",
+            "TAG",
+            "TGA"
+        ],
+        "C": [
+            "TGT",
+            "TGC"
+        ],
+        "W": [
+            "TGG"
+        ],
+        "P": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H": [
+            "CAT",
+            "CAC"
+        ],
+        "Q": [
+            "CAA",
+            "CAG"
+        ],
+        "R": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG"
+        ],
+        "I": [
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "M": [
+            "ATG"
+        ],
+        "T": [
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "N": [
+            "AAT",
+            "AAC"
+        ],
+        "K": [
+            "AAA",
+            "AAG"
+        ],
+        "V": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "A": [
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "D": [
+            "GAT",
+            "GAC"
+        ],
+        "E": [
+            "GAA",
+            "GAG"
+        ],
+        "G": [
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ]
+    },
+    {
+        "table_id": "12",
+        "F": [
+            "TTT",
+            "TTC"
+        ],
+        "L": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA"
+        ],
+        "S": [
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "CTG",
+            "AGT",
+            "AGC"
+        ],
+        "Y": [
+            "TAT",
+            "TAC"
+        ],
+        "*": [
+            "TAA",
+            "TAG",
+            "TGA"
+        ],
+        "C": [
+            "TGT",
+            "TGC"
+        ],
+        "W": [
+            "TGG"
+        ],
+        "P": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H": [
+            "CAT",
+            "CAC"
+        ],
+        "Q": [
+            "CAA",
+            "CAG"
+        ],
+        "R": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG"
+        ],
+        "I": [
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "M": [
+            "ATG"
+        ],
+        "T": [
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "N": [
+            "AAT",
+            "AAC"
+        ],
+        "K": [
+            "AAA",
+            "AAG"
+        ],
+        "V": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "A": [
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "D": [
+            "GAT",
+            "GAC"
+        ],
+        "E": [
+            "GAA",
+            "GAG"
+        ],
+        "G": [
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ]
+    },
+    {
+        "table_id": "13",
+        "F": [
+            "TTT",
+            "TTC"
+        ],
+        "L": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG"
+        ],
+        "S": [
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC"
+        ],
+        "Y": [
+            "TAT",
+            "TAC"
+        ],
+        "*": [
+            "TAA",
+            "TAG"
+        ],
+        "C": [
+            "TGT",
+            "TGC"
+        ],
+        "W": [
+            "TGA",
+            "TGG"
+        ],
+        "P": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H": [
+            "CAT",
+            "CAC"
+        ],
+        "Q": [
+            "CAA",
+            "CAG"
+        ],
+        "R": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG"
+        ],
+        "I": [
+            "ATT",
+            "ATC"
+        ],
+        "M": [
+            "ATA",
+            "ATG"
+        ],
+        "T": [
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "N": [
+            "AAT",
+            "AAC"
+        ],
+        "K": [
+            "AAA",
+            "AAG"
+        ],
+        "G": [
+            "AGA",
+            "AGG",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "V": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "A": [
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "D": [
+            "GAT",
+            "GAC"
+        ],
+        "E": [
+            "GAA",
+            "GAG"
+        ]
+    },
+    {
+        "table_id": "14",
+        "F": [
+            "TTT",
+            "TTC"
+        ],
+        "L": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG"
+        ],
+        "S": [
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "AGA",
+            "AGG"
+        ],
+        "Y": [
+            "TAT",
+            "TAC",
+            "TAA"
+        ],
+        "*": [
+            "TAG"
+        ],
+        "C": [
+            "TGT",
+            "TGC"
+        ],
+        "W": [
+            "TGA",
+            "TGG"
+        ],
+        "P": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H": [
+            "CAT",
+            "CAC"
+        ],
+        "Q": [
+            "CAA",
+            "CAG"
+        ],
+        "R": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG"
+        ],
+        "I": [
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "M": [
+            "ATG"
+        ],
+        "T": [
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "N": [
+            "AAT",
+            "AAC",
+            "AAA"
+        ],
+        "K": [
+            "AAG"
+        ],
+        "V": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "A": [
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "D": [
+            "GAT",
+            "GAC"
+        ],
+        "E": [
+            "GAA",
+            "GAG"
+        ],
+        "G": [
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ]
+    },
+    {
+        "table_id": "15",
+        "F": [
+            "TTT",
+            "TTC"
+        ],
+        "L": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG"
+        ],
+        "S": [
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC"
+        ],
+        "Y": [
+            "TAT",
+            "TAC"
+        ],
+        "*": [
+            "TAA",
+            "TGA"
+        ],
+        "Q": [
+            "TAG",
+            "CAA",
+            "CAG"
+        ],
+        "C": [
+            "TGT",
+            "TGC"
+        ],
+        "W": [
+            "TGG"
+        ],
+        "P": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H": [
+            "CAT",
+            "CAC"
+        ],
+        "R": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG"
+        ],
+        "I": [
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "M": [
+            "ATG"
+        ],
+        "T": [
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "N": [
+            "AAT",
+            "AAC"
+        ],
+        "K": [
+            "AAA",
+            "AAG"
+        ],
+        "V": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "A": [
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "D": [
+            "GAT",
+            "GAC"
+        ],
+        "E": [
+            "GAA",
+            "GAG"
+        ],
+        "G": [
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ]
+    },
+    {
+        "table_id": "16",
+        "F": [
+            "TTT",
+            "TTC"
+        ],
+        "L": [
+            "TTA",
+            "TTG",
+            "TAG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG"
+        ],
+        "S": [
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC"
+        ],
+        "Y": [
+            "TAT",
+            "TAC"
+        ],
+        "*": [
+            "TAA",
+            "TGA"
+        ],
+        "C": [
+            "TGT",
+            "TGC"
+        ],
+        "W": [
+            "TGG"
+        ],
+        "P": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H": [
+            "CAT",
+            "CAC"
+        ],
+        "Q": [
+            "CAA",
+            "CAG"
+        ],
+        "R": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG"
+        ],
+        "I": [
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "M": [
+            "ATG"
+        ],
+        "T": [
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "N": [
+            "AAT",
+            "AAC"
+        ],
+        "K": [
+            "AAA",
+            "AAG"
+        ],
+        "V": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "A": [
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "D": [
+            "GAT",
+            "GAC"
+        ],
+        "E": [
+            "GAA",
+            "GAG"
+        ],
+        "G": [
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ]
+    },
+    {
+        "table_id": "21",
+        "F": [
+            "TTT",
+            "TTC"
+        ],
+        "L": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG"
+        ],
+        "S": [
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "AGA",
+            "AGG"
+        ],
+        "Y": [
+            "TAT",
+            "TAC"
+        ],
+        "*": [
+            "TAA",
+            "TAG"
+        ],
+        "C": [
+            "TGT",
+            "TGC"
+        ],
+        "W": [
+            "TGA",
+            "TGG"
+        ],
+        "P": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H": [
+            "CAT",
+            "CAC"
+        ],
+        "Q": [
+            "CAA",
+            "CAG"
+        ],
+        "R": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG"
+        ],
+        "I": [
+            "ATT",
+            "ATC"
+        ],
+        "M": [
+            "ATA",
+            "ATG"
+        ],
+        "T": [
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "N": [
+            "AAT",
+            "AAC",
+            "AAA"
+        ],
+        "K": [
+            "AAG"
+        ],
+        "V": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "A": [
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "D": [
+            "GAT",
+            "GAC"
+        ],
+        "E": [
+            "GAA",
+            "GAG"
+        ],
+        "G": [
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ]
+    },
+    {
+        "table_id": "22",
+        "F": [
+            "TTT",
+            "TTC"
+        ],
+        "L": [
+            "TTA",
+            "TTG",
+            "TAG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG"
+        ],
+        "S": [
+            "TCT",
+            "TCC",
+            "TCG",
+            "AGT",
+            "AGC"
+        ],
+        "*": [
+            "TCA",
+            "TAA",
+            "TGA"
+        ],
+        "Y": [
+            "TAT",
+            "TAC"
+        ],
+        "C": [
+            "TGT",
+            "TGC"
+        ],
+        "W": [
+            "TGG"
+        ],
+        "P": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H": [
+            "CAT",
+            "CAC"
+        ],
+        "Q": [
+            "CAA",
+            "CAG"
+        ],
+        "R": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG"
+        ],
+        "I": [
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "M": [
+            "ATG"
+        ],
+        "T": [
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "N": [
+            "AAT",
+            "AAC"
+        ],
+        "K": [
+            "AAA",
+            "AAG"
+        ],
+        "V": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "A": [
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "D": [
+            "GAT",
+            "GAC"
+        ],
+        "E": [
+            "GAA",
+            "GAG"
+        ],
+        "G": [
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ]
+    },
+    {
+        "table_id": "23",
+        "F": [
+            "TTT",
+            "TTC"
+        ],
+        "*": [
+            "TTA",
+            "TAA",
+            "TAG",
+            "TGA"
+        ],
+        "L": [
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG"
+        ],
+        "S": [
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC"
+        ],
+        "Y": [
+            "TAT",
+            "TAC"
+        ],
+        "C": [
+            "TGT",
+            "TGC"
+        ],
+        "W": [
+            "TGG"
+        ],
+        "P": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H": [
+            "CAT",
+            "CAC"
+        ],
+        "Q": [
+            "CAA",
+            "CAG"
+        ],
+        "R": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG"
+        ],
+        "I": [
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "M": [
+            "ATG"
+        ],
+        "T": [
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "N": [
+            "AAT",
+            "AAC"
+        ],
+        "K": [
+            "AAA",
+            "AAG"
+        ],
+        "V": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "A": [
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "D": [
+            "GAT",
+            "GAC"
+        ],
+        "E": [
+            "GAA",
+            "GAG"
+        ],
+        "G": [
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ]
+    },
+    {
+        "table_id": "24",
+        "F": [
+            "TTT",
+            "TTC"
+        ],
+        "L": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG"
+        ],
+        "S": [
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "AGA"
+        ],
+        "Y": [
+            "TAT",
+            "TAC"
+        ],
+        "*": [
+            "TAA",
+            "TAG"
+        ],
+        "C": [
+            "TGT",
+            "TGC"
+        ],
+        "W": [
+            "TGA",
+            "TGG"
+        ],
+        "P": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H": [
+            "CAT",
+            "CAC"
+        ],
+        "Q": [
+            "CAA",
+            "CAG"
+        ],
+        "R": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG"
+        ],
+        "I": [
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "M": [
+            "ATG"
+        ],
+        "T": [
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "N": [
+            "AAT",
+            "AAC"
+        ],
+        "K": [
+            "AAA",
+            "AAG",
+            "AGG"
+        ],
+        "V": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "A": [
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "D": [
+            "GAT",
+            "GAC"
+        ],
+        "E": [
+            "GAA",
+            "GAG"
+        ],
+        "G": [
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ]
+    },
+    {
+        "table_id": "25",
+        "F": [
+            "TTT",
+            "TTC"
+        ],
+        "L": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG"
+        ],
+        "S": [
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC"
+        ],
+        "Y": [
+            "TAT",
+            "TAC"
+        ],
+        "*": [
+            "TAA",
+            "TAG"
+        ],
+        "C": [
+            "TGT",
+            "TGC"
+        ],
+        "G": [
+            "TGA",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "W": [
+            "TGG"
+        ],
+        "P": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H": [
+            "CAT",
+            "CAC"
+        ],
+        "Q": [
+            "CAA",
+            "CAG"
+        ],
+        "R": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG"
+        ],
+        "I": [
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "M": [
+            "ATG"
+        ],
+        "T": [
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "N": [
+            "AAT",
+            "AAC"
+        ],
+        "K": [
+            "AAA",
+            "AAG"
+        ],
+        "V": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "A": [
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "D": [
+            "GAT",
+            "GAC"
+        ],
+        "E": [
+            "GAA",
+            "GAG"
+        ]
+    },
+    {
+        "table_id": "26",
+        "F": [
+            "TTT",
+            "TTC"
+        ],
+        "L": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA"
+        ],
+        "S": [
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC"
+        ],
+        "Y": [
+            "TAT",
+            "TAC"
+        ],
+        "*": [
+            "TAA",
+            "TAG",
+            "TGA"
+        ],
+        "C": [
+            "TGT",
+            "TGC"
+        ],
+        "W": [
+            "TGG"
+        ],
+        "A": [
+            "CTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "P": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H": [
+            "CAT",
+            "CAC"
+        ],
+        "Q": [
+            "CAA",
+            "CAG"
+        ],
+        "R": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG"
+        ],
+        "I": [
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "M": [
+            "ATG"
+        ],
+        "T": [
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "N": [
+            "AAT",
+            "AAC"
+        ],
+        "K": [
+            "AAA",
+            "AAG"
+        ],
+        "V": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "D": [
+            "GAT",
+            "GAC"
+        ],
+        "E": [
+            "GAA",
+            "GAG"
+        ],
+        "G": [
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ]
+    },
+    {
+        "table_id": "27",
+        "F": [
+            "TTT",
+            "TTC"
+        ],
+        "L": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG"
+        ],
+        "S": [
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC"
+        ],
+        "Y": [
+            "TAT",
+            "TAC"
+        ],
+        "Q": [
+            "TAA",
+            "TAG",
+            "CAA",
+            "CAG"
+        ],
+        "C": [
+            "TGT",
+            "TGC"
+        ],
+        "W": [
+            "TGA",
+            "TGG"
+        ],
+        "P": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H": [
+            "CAT",
+            "CAC"
+        ],
+        "R": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG"
+        ],
+        "I": [
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "M": [
+            "ATG"
+        ],
+        "T": [
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "N": [
+            "AAT",
+            "AAC"
+        ],
+        "K": [
+            "AAA",
+            "AAG"
+        ],
+        "V": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "A": [
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "D": [
+            "GAT",
+            "GAC"
+        ],
+        "E": [
+            "GAA",
+            "GAG"
+        ],
+        "G": [
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ]
+    },
+    {
+        "table_id": "28",
+        "F": [
+            "TTT",
+            "TTC"
+        ],
+        "L": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG"
+        ],
+        "S": [
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC"
+        ],
+        "Y": [
+            "TAT",
+            "TAC"
+        ],
+        "Q": [
+            "TAA",
+            "TAG",
+            "CAA",
+            "CAG"
+        ],
+        "C": [
+            "TGT",
+            "TGC"
+        ],
+        "W": [
+            "TGA",
+            "TGG"
+        ],
+        "P": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H": [
+            "CAT",
+            "CAC"
+        ],
+        "R": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG"
+        ],
+        "I": [
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "M": [
+            "ATG"
+        ],
+        "T": [
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "N": [
+            "AAT",
+            "AAC"
+        ],
+        "K": [
+            "AAA",
+            "AAG"
+        ],
+        "V": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "A": [
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "D": [
+            "GAT",
+            "GAC"
+        ],
+        "E": [
+            "GAA",
+            "GAG"
+        ],
+        "G": [
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ]
+    },
+    {
+        "table_id": "29",
+        "F": [
+            "TTT",
+            "TTC"
+        ],
+        "L": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG"
+        ],
+        "S": [
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC"
+        ],
+        "Y": [
+            "TAT",
+            "TAC",
+            "TAA",
+            "TAG"
+        ],
+        "C": [
+            "TGT",
+            "TGC"
+        ],
+        "*": [
+            "TGA"
+        ],
+        "W": [
+            "TGG"
+        ],
+        "P": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H": [
+            "CAT",
+            "CAC"
+        ],
+        "Q": [
+            "CAA",
+            "CAG"
+        ],
+        "R": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG"
+        ],
+        "I": [
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "M": [
+            "ATG"
+        ],
+        "T": [
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "N": [
+            "AAT",
+            "AAC"
+        ],
+        "K": [
+            "AAA",
+            "AAG"
+        ],
+        "V": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "A": [
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "D": [
+            "GAT",
+            "GAC"
+        ],
+        "E": [
+            "GAA",
+            "GAG"
+        ],
+        "G": [
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ]
+    },
+    {
+        "table_id": "30",
+        "F": [
+            "TTT",
+            "TTC"
+        ],
+        "L": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG"
+        ],
+        "S": [
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC"
+        ],
+        "Y": [
+            "TAT",
+            "TAC"
+        ],
+        "E": [
+            "TAA",
+            "TAG",
+            "GAA",
+            "GAG"
+        ],
+        "C": [
+            "TGT",
+            "TGC"
+        ],
+        "*": [
+            "TGA"
+        ],
+        "W": [
+            "TGG"
+        ],
+        "P": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H": [
+            "CAT",
+            "CAC"
+        ],
+        "Q": [
+            "CAA",
+            "CAG"
+        ],
+        "R": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG"
+        ],
+        "I": [
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "M": [
+            "ATG"
+        ],
+        "T": [
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "N": [
+            "AAT",
+            "AAC"
+        ],
+        "K": [
+            "AAA",
+            "AAG"
+        ],
+        "V": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "A": [
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "D": [
+            "GAT",
+            "GAC"
+        ],
+        "G": [
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ]
+    },
+    {
+        "table_id": "31",
+        "F": [
+            "TTT",
+            "TTC"
+        ],
+        "L": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG"
+        ],
+        "S": [
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC"
+        ],
+        "Y": [
+            "TAT",
+            "TAC"
+        ],
+        "E": [
+            "TAA",
+            "TAG",
+            "GAA",
+            "GAG"
+        ],
+        "C": [
+            "TGT",
+            "TGC"
+        ],
+        "W": [
+            "TGA",
+            "TGG"
+        ],
+        "P": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H": [
+            "CAT",
+            "CAC"
+        ],
+        "Q": [
+            "CAA",
+            "CAG"
+        ],
+        "R": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG"
+        ],
+        "I": [
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "M": [
+            "ATG"
+        ],
+        "T": [
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "N": [
+            "AAT",
+            "AAC"
+        ],
+        "K": [
+            "AAA",
+            "AAG"
+        ],
+        "V": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "A": [
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "D": [
+            "GAT",
+            "GAC"
+        ],
+        "G": [
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ]
+    },
+    {
+        "table_id": "32",
+        "F": [
+            "TTT",
+            "TTC"
+        ],
+        "L": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG"
+        ],
+        "S": [
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC"
+        ],
+        "Y": [
+            "TAT",
+            "TAC"
+        ],
+        "*": [
+            "TAA",
+            "TGA"
+        ],
+        "W": [
+            "TAG",
+            "TGG"
+        ],
+        "C": [
+            "TGT",
+            "TGC"
+        ],
+        "P": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H": [
+            "CAT",
+            "CAC"
+        ],
+        "Q": [
+            "CAA",
+            "CAG"
+        ],
+        "R": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG"
+        ],
+        "I": [
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "M": [
+            "ATG"
+        ],
+        "T": [
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "N": [
+            "AAT",
+            "AAC"
+        ],
+        "K": [
+            "AAA",
+            "AAG"
+        ],
+        "V": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "A": [
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "D": [
+            "GAT",
+            "GAC"
+        ],
+        "E": [
+            "GAA",
+            "GAG"
+        ],
+        "G": [
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ]
+    },
+    {
+        "table_id": "33\n",
+        "F\n": [
+            "TTT",
+            "TTC"
+        ],
+        "L\n": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG"
+        ],
+        "S\n": [
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "AGA"
+        ],
+        "Y\n": [
+            "TAT",
+            "TAC",
+            "TAA"
+        ],
+        "*\n": [
+            "TAG"
+        ],
+        "C\n": [
+            "TGT",
+            "TGC"
+        ],
+        "W\n": [
+            "TGA",
+            "TGG"
+        ],
+        "P\n": [
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG"
+        ],
+        "H\n": [
+            "CAT",
+            "CAC"
+        ],
+        "Q\n": [
+            "CAA",
+            "CAG"
+        ],
+        "R\n": [
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG"
+        ],
+        "I\n": [
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "M\n": [
+            "ATG"
+        ],
+        "T\n": [
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG"
+        ],
+        "N\n": [
+            "AAT",
+            "AAC"
+        ],
+        "K\n": [
+            "AAA",
+            "AAG",
+            "AGG"
+        ],
+        "V\n": [
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG"
+        ],
+        "A\n": [
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG"
+        ],
+        "D\n": [
+            "GAT",
+            "GAC"
+        ],
+        "E\n": [
+            "GAA",
+            "GAG"
+        ],
+        "G\n": [
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ]
+    }
+]
