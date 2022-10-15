@@ -30,7 +30,7 @@ def download_and_save_file(url: str) -> str:
 def write_result_to_fasta_file(
     tuple_input: Tuple[List[Tuple[str, str]], bool, str]
 ):
-    seq_header_array, append_file, file_name = tuple_input
+    file_name, append_file, seq_header_array = tuple_input
 
     list_str = sum(seq_header_array, ())
 
