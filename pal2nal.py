@@ -56,20 +56,17 @@ def read_and_convert_fasta_files(
     nt_seqs = SimpleFastaParser(open(nt_file))
     aa_seqs = SimpleFastaParser(open(aa_file))
 
-    aas = []
-    nts = []
+    aas = {}
+    nts = {}
 
     i = 0
 
     for aa, nt in zip(aa_seqs, nt_seqs):
-        if aa[0] != nt[0]:
-            i += 1
-            continue
+        aas[aa[0]] = aa[1]
+        nts[nt[0]] = nt[1]
 
-        aas.append((aa[0], aa[1]))
-        nts.append((nt[0], nt[1]))
-
-    print(f"#{i} records filtered for pair ({aa_file}, {nt_file}) because they werent common between the two files")
+    aas = ((k, v) for k, v in aas.items())
+    nts = ((k, v) for k, v in nts.items())
 
     return (aas, nts)
 
