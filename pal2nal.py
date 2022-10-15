@@ -81,18 +81,23 @@ def read_and_convert_fasta_files(
     aa_seqs = SimpleFastaParser(open(aa_file))
 
     aas = []
-    nts = []
+    nts = {}
+    nt_headers = {}
 
-    i = 0
-
-    for aa, nt in zip(aa_seqs, nt_seqs):
-        if aa[0] != nt[0]:
-            continue
-
-        aas.append((aa[0], aa[1]))
-        nts.append((nt[0], nt[1]))
+    for i, (aa, nt) in enumerate(zip(aa_seqs, nt_seqs)):
+        aa_header, aa_seq = aa
+        nt_header, nt_seq = nt
+        
+        nt_headers[i] = aa_header
+        nts[nt_header] = (nt_header, nt_seq)
+        aas.append((aa_header, aa_seq))
     
-    return (aas, nts)
+    nts_in_order = [None for _ in range(len(nts))]
+
+    for i, correct_header in nt_headers.items():
+        nts_in_order[i] = nts[correct_header]
+
+    return (aas, nts_in_order)
 
 
 def convert_to_codon(
