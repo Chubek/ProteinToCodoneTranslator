@@ -3,6 +3,7 @@ import os
 import time
 from functools import wraps
 from typing import List, Tuple
+from functools import reduce
 
 from Bio.SeqIO.FastaIO import SimpleFastaParser
 from pro2codon import pn2codon
@@ -28,7 +29,8 @@ def download_and_save_file(url: str) -> str:
 
 
 def write_result_to_fasta_file(
-    tuple_input: Tuple[List[Tuple[str, str]], bool, str]
+    acc: List,
+    tuple_input: Tuple[List[Tuple[str, str]], bool, str],
 ):
     file_name, append_file, seq_header_array = tuple_input
 
@@ -44,6 +46,7 @@ def write_result_to_fasta_file(
 
     print(f"List of reverse-translated NTs written to: {file_name}")
 
+    return None
 
 def read_and_convert_fasta_files(
     aa_file: str,
@@ -56,21 +59,18 @@ def read_and_convert_fasta_files(
     nt_seqs = SimpleFastaParser(open(nt_file))
     aa_seqs = SimpleFastaParser(open(aa_file))
 
-    aas = {}
-    nts = {}
+    aas = []
+    nts = []
 
     i = 0
 
     for aa, nt in zip(aa_seqs, nt_seqs):
-        aas[aa[0]] = aa[1]
-        nts[nt[0]] = nt[1]
+        if aa[0] != nt[0]:
+            continue
 
-    aas_keys = list(aas.keys())
-    nts_keys = list(nts.keys())
-
-    aas = [(k, v) for k, v in aas.items() if k in nts_keys]
-    nts = [(k, v) for k, v in nts.items() if k in aas_keys]
-
+        aas.append((aa[0], aa[1]))
+        nts.append((nt[0], nt[1]))
+    
     return (aas, nts)
 
 
@@ -165,7 +165,7 @@ def init_argparse() -> argparse.ArgumentParser:
     )
 
     parser.add_argument(
-        "-t", "--target_files", default="test_result.nt.fa", nargs="*",
+        "-tr", "--target_files", default="test_result.nt.fa", nargs="*",
         help="""
         Target file(s) to save the final results as a FASTA (.fa) file
         
@@ -199,9 +199,9 @@ def pal_to_nal() -> None:
 
     table = args.table
     table_id = args.table_id
-    aas_paths_or_urls = args.amino_acid_fasta
-    nts_paths_or_urls = args.nucleotide_fasta
-    targets = args.target_files
+    aas_paths_or_urls = sum([[args.amino_acid_fasta]], [])
+    nts_paths_or_urls = sum([[args.nucleotide_fasta]], [])
+    targets = sum([[args.target_files]], [])
 
     only_one = False
 
@@ -220,8 +220,6 @@ def pal_to_nal() -> None:
                 print("I/O length check succeeded")
 
     table_file_name = download_and_save_file(table)
-
-    result_arrs = []
 
     i = [1]
 
@@ -249,16 +247,15 @@ def pal_to_nal() -> None:
         else:
             fname = targets[i[0] - 1]
 
-        result_arrs.append((fname, append_file, convert_to_codon(
-            filepath=table_file_name, table_index=table_id, aa_seqs=aa_seqs, nt_seqs=nt_seqs)))
+        return (fname, append_file, convert_to_codon(
+            filepath=table_file_name, table_index=table_id, aa_seqs=aa_seqs, nt_seqs=nt_seqs))
 
-    zip_list = ((aa_f, nt_f) for aa_f, nt_f in zip(
+    zip_list = list(zip(
         aas_paths_or_urls,
         nts_paths_or_urls
     ))
 
-    map(work, zip_list)
-    map(write_result_to_fasta_file, result_arrs)
+    reduce(write_result_to_fasta_file, map(work, zip_list), [])
 
     print("Done! You can see the final time below.")
 
