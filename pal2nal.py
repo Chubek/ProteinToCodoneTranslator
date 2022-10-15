@@ -9,6 +9,7 @@ from Bio.SeqIO.FastaIO import SimpleFastaParser
 from pro2codon import pn2codon
 from requests import get
 
+
 def download_gdown(s: str):
     if s[0] != '(':
         return None
@@ -63,7 +64,7 @@ def write_result_to_fasta_file(
         mode = "w"
 
     with open(file_name, mode) as fw:
-        fw.writelines(list_str)
+        fw.writelines("\n".join(list_str))
 
     print(f"List of reverse-translated NTs written to: {file_name}")
 
