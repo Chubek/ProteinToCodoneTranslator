@@ -1,16 +1,37 @@
 import argparse
 import os
 import time
-from functools import wraps
+from functools import reduce, wraps
 from typing import List, Tuple
-from functools import reduce
 
+import gdown
 from Bio.SeqIO.FastaIO import SimpleFastaParser
 from pro2codon import pn2codon
 from requests import get
 
+def download_gdown(s: str):
+    if s[0] != '(':
+        return None
+
+    s = s.replace("(", "").replace(")", "")
+
+    splt = [ss.trim() for ss in s.split(",")]
+
+    if len(splt) != 2:
+        raise Exception("Google Drive links must be in format (id, output name) format")
+
+    id_, name = splt
+
+    gdown.download(id=id_, output=name)
+
+    return name
 
 def download_and_save_file(url: str) -> str:
+    gdn = download_gdown(url)
+
+    if gdn is not None:
+        return gdn
+    
     name = url.split("/")[-1]
 
     if not any([p in url[:8] for p in ["http", "www"]]):
@@ -97,7 +118,7 @@ def init_argparse() -> argparse.ArgumentParser:
         "-t", "--table", default="genetic_table.json",
         help="""
         Path or a direct download URL to the genetics table.
-        Make sure that the URL starts with (http(s)://) or www
+        Make sure that the URL starts with (http(s)://) or www. Can be Google Drive IDs in this format -> `(ID, [savename])`
         The program checks if the file exists before attempting to download so make sure a file with the same name does not exist in the folder.        
         
         Consult `genetic_table.json` which ships with the code to get a sense of how the JSON file should be formatted.
@@ -148,7 +169,7 @@ def init_argparse() -> argparse.ArgumentParser:
         One or multiple paths or direct download URLs to the FASTA file containing Amino Acid Sequences.
         Number of these arguments must be equal to `-ntf`
 
-        The URL must contain (http(s)://) or www
+        The URL must contain (http(s)://) or www. Can be Google Drive IDs in this format -> `(ID, [savename])`
         The program will check if the file already exists in the library before downloading it, so make sure a file of the same name does not already exist.
         """
     )
@@ -159,7 +180,7 @@ def init_argparse() -> argparse.ArgumentParser:
         One or multiple paths or direct download URLs to the FASTA file containing source Nucleotide Sequences.
         Number of these arguments must be equal to `-aaf`
 
-        The URL must contain (http(s)://) or www
+        The URL must contain (http(s)://) or www. Can be Google Drive IDs in this format -> `(ID, [savename])`
         The program will check if the file already exists in the library before downloading it, so make sure a file of the same name does not already exist.
         """
     )
