@@ -2,7 +2,7 @@ import argparse
 import os
 import time
 from functools import reduce, wraps
-from typing import List, Tuple, Union, Iterable
+from typing import List, Tuple, Union
 
 import gdown
 from Bio.SeqIO.FastaIO import SimpleFastaParser
@@ -226,13 +226,11 @@ def timeit(func):
         return result
     return timeit_wrapper
 
-def check_iterable(item: Union[str, Iterable]) -> Union[str, Iterable]:
-    if isinstance(item, Iterable):
+def check_iterable(item: Union[str, List]) -> Union[str, List]:
+    if isinstance(item, List):
         return item
-    elif isinstance(item, str):
-        return [item]
     else:
-        raise Exception("You passed a wrong value to batch args (ntf, aaf or tr), it's neither a list nor a single string")
+        return [item]
     
 
 @timeit
@@ -249,7 +247,7 @@ def pal_to_nal() -> None:
     targets = check_iterable(args.target_files)
     log = True if args.log == "1" else False
 
-    only_one = False
+    only_one = False    
 
     if len(targets) != 0:
         if len(targets) == 1:
