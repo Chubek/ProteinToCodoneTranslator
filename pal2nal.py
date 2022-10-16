@@ -106,8 +106,9 @@ def convert_to_codon(
     table_index: int,
     aa_seqs: List[Tuple[str, str]],
     nt_seqs: List[Tuple[str, str]],
-):
-    return pn2codon(filepath, table_index, aa_seqs, nt_seqs)
+    do_log: bool,
+):  
+    return pn2codon(filepath, table_index, aa_seqs, nt_seqs, do_log)
 
 
 def init_argparse() -> argparse.ArgumentParser:
@@ -201,6 +202,15 @@ def init_argparse() -> argparse.ArgumentParser:
         """
     )
 
+    parser.add_argument(
+        "-l", "--log", default="0",
+        help="""
+        Enable logging (separate from errors).
+        0 = Disable, 1 = Enable.
+        Might be intrusive.
+        """
+    )
+
     return parser
 
 
@@ -229,6 +239,7 @@ def pal_to_nal() -> None:
     aas_paths_or_urls = sum([[args.amino_acid_fasta]], [])
     nts_paths_or_urls = sum([[args.nucleotide_fasta]], [])
     targets = sum([[args.target_files]], [])
+    log = True if args.log == "1" else False
 
     only_one = False
 
@@ -275,7 +286,11 @@ def pal_to_nal() -> None:
             fname = targets[i[0] - 1]
 
         return (fname, append_file, convert_to_codon(
-            filepath=table_file_name, table_index=table_id, aa_seqs=aa_seqs, nt_seqs=nt_seqs))
+            filepath=table_file_name,
+             table_index=table_id,
+              aa_seqs=aa_seqs, 
+              nt_seqs=nt_seqs,
+              do_log=log))
 
     zip_list = list(zip(
         aas_paths_or_urls,
