@@ -10,65 +10,20 @@ from pro2codon import pn2codon
 from requests import get
 
 
-def download_gdown(s: str):
-    if s[0] != '(':
-        return None
-
-    s = s.replace("(", "").replace(")", "")
-
-    splt = [ss.trim() for ss in s.split(",")]
-
-    if len(splt) != 2:
-        raise Exception("Google Drive links must be in format (id, output name) format")
-
-    id_, name = splt
-
-    gdown.download(id=id_, output=name)
-
-    return name
-
-def download_and_save_file(url: str) -> str:
-    gdn = download_gdown(url)
-
-    if gdn is not None:
-        return gdn
-    
-    name = url.split("/")[-1]
-
-    if not any([p in url[:8] for p in ["http", "www"]]):
-        return name
-
-    if os.path.exists(name):
-        print("File already exists, did not download.")
-        return name
-
-    resp = get(url)
-
-    with open(name, "w") as fw:
-        fw.write(resp.text)
-
-    return name
-
-
 def write_result_to_fasta_file(
-    acc: List,
-    tuple_input: Tuple[List[Tuple[str, str]], bool, str],
+    file_name: str,
+    seq_header_array: List[Tuple[str, str]],
 ):
-    file_name, append_file, seq_header_array = tuple_input
 
     list_str = sum(seq_header_array, ())
 
-    if os.path.exists(file_name) and append_file:
-        mode = "w+"
-    else:
-        mode = "w"
-
-    with open(file_name, mode) as fw:
+    with open(file_name, "w") as fw:
         fw.writelines("\n".join(list_str))
 
     print(f"List of reverse-translated NTs written to: {file_name}")
 
     return None
+
 
 def read_and_convert_fasta_files(
     aa_file: str,
@@ -88,11 +43,11 @@ def read_and_convert_fasta_files(
     for i, (aa, nt) in enumerate(zip(aa_seqs, nt_seqs)):
         aa_header, aa_seq = aa
         nt_header, nt_seq = nt
-        
+
         nt_headers[i] = aa_header
         nts[nt_header] = (nt_header, nt_seq)
         aas.append((aa_header, aa_seq))
-    
+
     nts_in_order = [None for _ in range(len(nts))]
 
     for i, correct_header in nt_headers.items():
@@ -107,7 +62,7 @@ def convert_to_codon(
     aa_seqs: List[Tuple[str, str]],
     nt_seqs: List[Tuple[str, str]],
     do_log: bool,
-):  
+):
     return pn2codon(filepath, table_index, aa_seqs, nt_seqs, do_log)
 
 
@@ -117,17 +72,29 @@ def init_argparse() -> argparse.ArgumentParser:
 
         usage="pal2nal.py [OPTIONS] [FILES]...",
 
-        description="Convert Amino Acids to Codons using the default NCBI table, or your specified table."
+        description="Convert Amino Acids to Codons with error checking using the default NCBI table, or your specified table."
 
     )
 
     parser.add_argument(
         "-t", "--table", default="genetic_table.json",
         help="""
-        Path or a direct download URL to the genetics table.
-        Make sure that the URL starts with (http(s)://) or www. Can be Google Drive IDs in this format -> `(ID, [savename])`
-        The program checks if the file exists before attempting to download so make sure a file with the same name does not exist in the folder.        
-        
+        Path to the genetics table in JSON format.
+
+        The format of JSON should be:
+        [
+            {
+                "table_id:" 1,
+                "M": ["ATG", "ATA"],
+                "N": ...
+            },
+            {
+                "table_id:" 2,
+                "M": ["ATA"],
+                "N": ...
+            }
+        ]
+       
         Consult `genetic_table.json` which ships with the code to get a sense of how the JSON file should be formatted.
         """
     )
@@ -173,32 +140,21 @@ def init_argparse() -> argparse.ArgumentParser:
     parser.add_argument(
         "-aaf", "--amino_acid_fasta", default="test.aa.fa", nargs="*",
         help="""
-        One or multiple paths or direct download URLs to the FASTA file containing Amino Acid Sequences.
-        Number of these arguments must be equal to `-ntf`
-
-        The URL must contain (http(s)://) or www. Can be Google Drive IDs in this format -> `(ID, [savename])`
-        The program will check if the file already exists in the library before downloading it, so make sure a file of the same name does not already exist.
+        A path to the FASTA file containing Amino Acid Sequences.
         """
     )
 
     parser.add_argument(
-        "-ntf", "--nucleotide_fasta", default="test.nt.fa", nargs="*",
+        "-ntf", "--nucleotide_fasta", default="test.nt.fa",
         help="""
-        One or multiple paths or direct download URLs to the FASTA file containing source Nucleotide Sequences.
-        Number of these arguments must be equal to `-aaf`
-
-        The URL must contain (http(s)://) or www. Can be Google Drive IDs in this format -> `(ID, [savename])`
-        The program will check if the file already exists in the library before downloading it, so make sure a file of the same name does not already exist.
+        A path to the FASTA file containing source Nucleotide Sequences.
         """
     )
 
     parser.add_argument(
-        "-tr", "--target_files", default="test_result.nt.fa", nargs="*",
+        "-tr", "--target_files", default="test_result.nt.fa",
         help="""
-        Target file(s) to save the final results as a FASTA (.fa) file
-        
-        If one file specifed and multiple NTs and AAs are passed, it will combine them. If an equal number of files are specified, it will map each to each. Otherwise will error out.
-        However if no argument is specified, it will save the result as `[source_nt_filename]_result_[num].fa`
+        Target file to save the final results as a FASTA (.fa) file
         """
     )
 
@@ -226,84 +182,33 @@ def timeit(func):
         return result
     return timeit_wrapper
 
-def check_iterable(item: Union[str, List]) -> Union[str, List]:
-    if isinstance(item, List):
-        return item
-    else:
-        return [item]
-    
 
 @timeit
 def pal_to_nal() -> None:
-    print("Starting the operation, if you have not read the help using `pal2nal.py -h` and this is your first time, please do!")
+    print("Starting the operation...")
 
     parser = init_argparse()
     args = parser.parse_args()
 
-    table = args.table
+    table_path = args.table
     table_id = args.table_id
-    aas_paths_or_urls = check_iterable(args.amino_acid_fasta)
-    nts_paths_or_urls = check_iterable(args.nucleotide_fasta)
-    targets = check_iterable(args.target_files)
+    aas_path = args.amino_acid_fasta
+    nts_path = args.nucleotide_fasta
+    target_path = args.target_files
     log = True if args.log == "1" else False
 
-    only_one = False    
+    aa_seqs, nt_seqs = read_and_convert_fasta_files(
+        aas_path,
+        nts_path
+    )
 
-    if len(targets) != 0:
-        if len(targets) == 1:
-            if len(aas_paths_or_urls) == len(nts_paths_or_urls) == 1:
-                only_one = True
-        else:
-            if len(aas_paths_or_urls) != len(nts_paths_or_urls):
-                raise Exception(
-                    "Length of NTs and AAs is not the same --- pass equal number of files, each mapping to the other respectively")
-            elif len(aas_paths_or_urls) != len(targets):
-                raise Exception(
-                    "Length of targets is not equal to the number of inputs. Either pass none to name automatically or pass one to combine. Otherwise pass targets respectively.")
-            else:
-                print("I/O length check succeeded")
-
-    table_file_name = download_and_save_file(table)
-
-    i = [1]
-
-    def work(tup):
-        aa_f, nt_f = tup
-
-        aa_f = download_and_save_file(aa_f)
-        nt_f = download_and_save_file(nt_f)
-
-        aa_seqs, nt_seqs = read_and_convert_fasta_files(aa_f, nt_f)
-
-        i[0] += 1
-
-        append_file = False
-
-        if len(targets) == 0:
-            fname = nt_f.split(".")[-2].replace(".nt", "")
-            fname = f"{fname}_result_{i[0]}.nt.fa"
-        elif only_one:
-            fname = targets[0]
-        elif len(targets) == 1 and not only_one:
-            fname = nt_f.split(".")[-2].replace(".nt", "")
-            fname = f"{fname}_result.nt.fa"
-            append_file = True
-        else:
-            fname = targets[i[0] - 1]
-
-        return (fname, append_file, convert_to_codon(
-            filepath=table_file_name,
-             table_index=table_id,
-              aa_seqs=aa_seqs, 
-              nt_seqs=nt_seqs,
-              do_log=log))
-
-    zip_list = list(zip(
-        aas_paths_or_urls,
-        nts_paths_or_urls
+    write_result_to_fasta_file(target_path, convert_to_codon(
+        filepath=table_path,
+        table_index=table_id,
+        aa_seqs=aa_seqs,
+        nt_seqs=nt_seqs,
+        do_log=log
     ))
-
-    reduce(write_result_to_fasta_file, map(work, zip_list), [])
 
     print("Done! You can see the final time below.")
 
