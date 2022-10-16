@@ -1,4 +1,4 @@
-pro2codon
+pro2codon==0.4.0
 biopython
 requests
 gdown

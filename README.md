@@ -1,5 +1,17 @@
 # Pal2Nal
 
+# New Changes!
+
+1- You must run `pip3 install -r requirements.txt` again. Don't forget this.
+2- Warnings and log added.
+
+Current warnings:
+1- Header mismatch in (AA = (header. seq), NT = (header, seq)) tuples.
+2- AA != Nuc Codon Result
+
+Current log info:
+When going through the list of possible triplets, if a triplet does not match the triplet in sequence, it will put out a detailed log.
+
 # Note
 Run `python3 pal2nal.py -h` to see a detailed guide. PLEASE do it before you attempt to make a run. However, with the test files provided, you can run the script without any arguments to quickly see and time the script.
 
