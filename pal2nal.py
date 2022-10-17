@@ -1,11 +1,10 @@
 import argparse
 import time
-from functools import reduce, wraps
-from typing import List, Tuple, Union
+from functools import wraps
+from typing import List, Tuple
 
 from Bio.SeqIO.FastaIO import SimpleFastaParser
 from pro2codon import pn2codon
-from requests import get
 import sys
 
 
@@ -13,7 +12,6 @@ def write_result_to_fasta_file(
     file_name: str,
     seq_header_array: List[Tuple[str, str]],
 ):
-
     list_str = sum(seq_header_array, ())
 
     with open(file_name, "w") as fw:
@@ -46,6 +44,7 @@ def read_and_convert_fasta_files(
         nt_headers[i] = aa_header
         nts[nt_header] = (nt_header, nt_seq)
         aas.append((aa_header, aa_seq))
+
 
     nts_in_order = [None for _ in range(len(nts))]
 
