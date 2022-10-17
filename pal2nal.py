@@ -141,7 +141,7 @@ def init_argparse() -> argparse.ArgumentParser:
     )
 
     parser.add_argument(
-        "-aaf", "--amino_acid_fasta", default="test.aa.fa", nargs="*",
+        "-aaf", "--amino_acid_fasta", default="test.aa.fa",
         help="""
         A path to the FASTA file containing Amino Acid Sequences.
         """
