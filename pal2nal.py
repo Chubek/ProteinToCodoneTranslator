@@ -12,7 +12,11 @@ def write_result_to_fasta_file(
     file_name: str,
     seq_header_array: List[Tuple[str, str]],
 ):
-    list_str = sum(seq_header_array, ())
+    
+    list_str = list(sum(seq_header_array, ()))
+
+    for i in range(0, len(list_str), 2):
+        list_str[i] = f">{list_str[i]}"
 
     with open(file_name, "w") as fw:
         fw.writelines("\n".join(list_str))
