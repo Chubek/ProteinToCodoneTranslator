@@ -1,13 +1,12 @@
 import argparse
-import os
 import time
 from functools import reduce, wraps
 from typing import List, Tuple, Union
 
-import gdown
 from Bio.SeqIO.FastaIO import SimpleFastaParser
 from pro2codon import pn2codon
 from requests import get
+import sys
 
 
 def write_result_to_fasta_file(
@@ -51,7 +50,11 @@ def read_and_convert_fasta_files(
     nts_in_order = [None for _ in range(len(nts))]
 
     for i, correct_header in nt_headers.items():
-        nts_in_order[i] = nts[correct_header]
+        try:
+            nts_in_order[i] = nts[correct_header]
+        except:
+            print("ERROR CAUGHT: There is a single header in PEP sequence FASTA file that does not exist in NUC sequence FASTA file")
+            sys.exit()
 
     return (aas, nts_in_order)
 
