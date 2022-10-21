@@ -1,19 +1,18 @@
 import argparse
-import sys
+import json
+from multiprocessing import Pool
 import time
-from functools import wraps
+from multiprocessing import Pool
+from functools import reduce, wraps
 from pathlib import Path
-from typing import Generator, List, Tuple
-from multiprocessing.pool import ThreadPool
-from threading import Lock
+from typing import Any, Dict, Generator, List, Tuple
 
 from Bio.SeqIO.FastaIO import SimpleFastaParser
 from pro2codon import pn2codon
 
 GENETIC_TABLE = """
-[
-    {
-        "table_id": "1",
+{
+    "1": {
         "F": [
             "TTT",
             "TTC"
@@ -119,10 +118,98 @@ GENETIC_TABLE = """
             "GGC",
             "GGA",
             "GGG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "TAT",
+            "TAC",
+            "TAA",
+            "TAG",
+            "TGA",
+            "TGT",
+            "TGC",
+            "TGG",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CAA",
+            "CAG",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "GAT",
+            "GAC",
+            "GAA",
+            "GAG",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "Z": [
+            "CAA",
+            "CAG",
+            "GAA",
+            "GAG"
         ]
     },
-    {
-        "table_id": "2",
+    "2": {
         "F": [
             "TTT",
             "TTC"
@@ -228,10 +315,97 @@ GENETIC_TABLE = """
             "GGC",
             "GGA",
             "GGG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "TAT",
+            "TAC",
+            "TAA",
+            "TAG",
+            "AGA",
+            "AGG",
+            "TGT",
+            "TGC",
+            "TGA",
+            "TGG",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CAA",
+            "CAG",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "GAT",
+            "GAC",
+            "GAA",
+            "GAG",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "ATT",
+            "ATC"
+        ],
+        "Z": [
+            "CAA",
+            "CAG",
+            "GAA",
+            "GAG"
         ]
     },
-    {
-        "table_id": "3",
+    "3": {
         "F": [
             "TTT",
             "TTC"
@@ -337,10 +511,93 @@ GENETIC_TABLE = """
             "GGC",
             "GGA",
             "GGG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TTG",
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "TAT",
+            "TAC",
+            "TAA",
+            "TAG",
+            "TGT",
+            "TGC",
+            "TGA",
+            "TGG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CAA",
+            "CAG",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "GAT",
+            "GAC",
+            "GAA",
+            "GAG",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTA",
+            "TTG",
+            "ATT",
+            "ATC"
+        ],
+        "Z": [
+            "CAA",
+            "CAG",
+            "GAA",
+            "GAG"
         ]
     },
-    {
-        "table_id": "4",
+    "4": {
         "F": [
             "TTT",
             "TTC"
@@ -446,10 +703,98 @@ GENETIC_TABLE = """
             "GGC",
             "GGA",
             "GGG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "TAT",
+            "TAC",
+            "TAA",
+            "TAG",
+            "TGT",
+            "TGC",
+            "TGA",
+            "TGG",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CAA",
+            "CAG",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "GAT",
+            "GAC",
+            "GAA",
+            "GAG",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "Z": [
+            "CAA",
+            "CAG",
+            "GAA",
+            "GAG"
         ]
     },
-    {
-        "table_id": "5",
+    "5": {
         "F": [
             "TTT",
             "TTC"
@@ -555,10 +900,97 @@ GENETIC_TABLE = """
             "GGC",
             "GGA",
             "GGG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "AGA",
+            "AGG",
+            "TAT",
+            "TAC",
+            "TAA",
+            "TAG",
+            "TGT",
+            "TGC",
+            "TGA",
+            "TGG",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CAA",
+            "CAG",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "GAT",
+            "GAC",
+            "GAA",
+            "GAG",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "ATT",
+            "ATC"
+        ],
+        "Z": [
+            "CAA",
+            "CAG",
+            "GAA",
+            "GAG"
         ]
     },
-    {
-        "table_id": "6",
+    "6": {
         "F": [
             "TTT",
             "TTC"
@@ -664,10 +1096,100 @@ GENETIC_TABLE = """
             "GGC",
             "GGA",
             "GGG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "TAT",
+            "TAC",
+            "TAA",
+            "TAG",
+            "CAA",
+            "CAG",
+            "TGT",
+            "TGC",
+            "TGA",
+            "TGG",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "GAT",
+            "GAC",
+            "GAA",
+            "GAG",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "Z": [
+            "TAA",
+            "TAG",
+            "CAA",
+            "CAG",
+            "GAA",
+            "GAG"
         ]
     },
-    {
-        "table_id": "9",
+    "9": {
         "F": [
             "TTT",
             "TTC"
@@ -773,10 +1295,99 @@ GENETIC_TABLE = """
             "GGC",
             "GGA",
             "GGG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "AGA",
+            "AGG",
+            "TAT",
+            "TAC",
+            "TAA",
+            "TAG",
+            "TGT",
+            "TGC",
+            "TGA",
+            "TGG",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CAA",
+            "CAG",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "GAT",
+            "GAC",
+            "GAA",
+            "GAG",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "AAA",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "Z": [
+            "CAA",
+            "CAG",
+            "GAA",
+            "GAG"
         ]
     },
-    {
-        "table_id": "10",
+    "10": {
         "F": [
             "TTT",
             "TTC"
@@ -882,10 +1493,98 @@ GENETIC_TABLE = """
             "GGC",
             "GGA",
             "GGG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "TAT",
+            "TAC",
+            "TAA",
+            "TAG",
+            "TGT",
+            "TGC",
+            "TGA",
+            "TGG",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CAA",
+            "CAG",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "GAT",
+            "GAC",
+            "GAA",
+            "GAG",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "Z": [
+            "CAA",
+            "CAG",
+            "GAA",
+            "GAG"
         ]
     },
-    {
-        "table_id": "11",
+    "11": {
         "F": [
             "TTT",
             "TTC"
@@ -991,10 +1690,98 @@ GENETIC_TABLE = """
             "GGC",
             "GGA",
             "GGG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "TAT",
+            "TAC",
+            "TAA",
+            "TAG",
+            "TGA",
+            "TGT",
+            "TGC",
+            "TGG",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CAA",
+            "CAG",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "GAT",
+            "GAC",
+            "GAA",
+            "GAG",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "Z": [
+            "CAA",
+            "CAG",
+            "GAA",
+            "GAG"
         ]
     },
-    {
-        "table_id": "12",
+    "12": {
         "F": [
             "TTT",
             "TTC"
@@ -1100,10 +1887,97 @@ GENETIC_TABLE = """
             "GGC",
             "GGA",
             "GGG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "CTG",
+            "AGT",
+            "AGC",
+            "TAT",
+            "TAC",
+            "TAA",
+            "TAG",
+            "TGA",
+            "TGT",
+            "TGC",
+            "TGG",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CAA",
+            "CAG",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "GAT",
+            "GAC",
+            "GAA",
+            "GAG",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "Z": [
+            "CAA",
+            "CAG",
+            "GAA",
+            "GAG"
         ]
     },
-    {
-        "table_id": "13",
+    "13": {
         "F": [
             "TTT",
             "TTC"
@@ -1209,10 +2083,97 @@ GENETIC_TABLE = """
         "E": [
             "GAA",
             "GAG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "TAT",
+            "TAC",
+            "TAA",
+            "TAG",
+            "TGT",
+            "TGC",
+            "TGA",
+            "TGG",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CAA",
+            "CAG",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "AGA",
+            "AGG",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "GAT",
+            "GAC",
+            "GAA",
+            "GAG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "ATT",
+            "ATC"
+        ],
+        "Z": [
+            "CAA",
+            "CAG",
+            "GAA",
+            "GAG"
         ]
     },
-    {
-        "table_id": "14",
+    "14": {
         "F": [
             "TTT",
             "TTC"
@@ -1318,10 +2279,99 @@ GENETIC_TABLE = """
             "GGC",
             "GGA",
             "GGG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "AGA",
+            "AGG",
+            "TAT",
+            "TAC",
+            "TAA",
+            "TAG",
+            "TGT",
+            "TGC",
+            "TGA",
+            "TGG",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CAA",
+            "CAG",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "GAT",
+            "GAC",
+            "GAA",
+            "GAG",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "AAA",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "Z": [
+            "CAA",
+            "CAG",
+            "GAA",
+            "GAG"
         ]
     },
-    {
-        "table_id": "15",
+    "15": {
         "F": [
             "TTT",
             "TTC"
@@ -1427,10 +2477,99 @@ GENETIC_TABLE = """
             "GGC",
             "GGA",
             "GGG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "TAT",
+            "TAC",
+            "TAA",
+            "TGA",
+            "TAG",
+            "CAA",
+            "CAG",
+            "TGT",
+            "TGC",
+            "TGG",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "GAT",
+            "GAC",
+            "GAA",
+            "GAG",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "Z": [
+            "TAG",
+            "CAA",
+            "CAG",
+            "GAA",
+            "GAG"
         ]
     },
-    {
-        "table_id": "16",
+    "16": {
         "F": [
             "TTT",
             "TTC"
@@ -1536,10 +2675,99 @@ GENETIC_TABLE = """
             "GGC",
             "GGA",
             "GGG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TTG",
+            "TAG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "TAT",
+            "TAC",
+            "TAA",
+            "TGA",
+            "TGT",
+            "TGC",
+            "TGG",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CAA",
+            "CAG",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "GAT",
+            "GAC",
+            "GAA",
+            "GAG",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTA",
+            "TTG",
+            "TAG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "Z": [
+            "CAA",
+            "CAG",
+            "GAA",
+            "GAG"
         ]
     },
-    {
-        "table_id": "21",
+    "21": {
         "F": [
             "TTT",
             "TTC"
@@ -1645,10 +2873,98 @@ GENETIC_TABLE = """
             "GGC",
             "GGA",
             "GGG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "AGA",
+            "AGG",
+            "TAT",
+            "TAC",
+            "TAA",
+            "TAG",
+            "TGT",
+            "TGC",
+            "TGA",
+            "TGG",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CAA",
+            "CAG",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "GAT",
+            "GAC",
+            "GAA",
+            "GAG",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "AAA",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "ATT",
+            "ATC"
+        ],
+        "Z": [
+            "CAA",
+            "CAG",
+            "GAA",
+            "GAG"
         ]
     },
-    {
-        "table_id": "22",
+    "22": {
         "F": [
             "TTT",
             "TTC"
@@ -1754,10 +3070,99 @@ GENETIC_TABLE = """
             "GGC",
             "GGA",
             "GGG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TTG",
+            "TAG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "TCT",
+            "TCC",
+            "TCG",
+            "AGT",
+            "AGC",
+            "TCA",
+            "TAA",
+            "TGA",
+            "TAT",
+            "TAC",
+            "TGT",
+            "TGC",
+            "TGG",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CAA",
+            "CAG",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "GAT",
+            "GAC",
+            "GAA",
+            "GAG",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTA",
+            "TTG",
+            "TAG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "Z": [
+            "CAA",
+            "CAG",
+            "GAA",
+            "GAG"
         ]
     },
-    {
-        "table_id": "23",
+    "23": {
         "F": [
             "TTT",
             "TTC"
@@ -1863,10 +3268,97 @@ GENETIC_TABLE = """
             "GGC",
             "GGA",
             "GGG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TAA",
+            "TAG",
+            "TGA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "TAT",
+            "TAC",
+            "TGT",
+            "TGC",
+            "TGG",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CAA",
+            "CAG",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "GAT",
+            "GAC",
+            "GAA",
+            "GAG",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "Z": [
+            "CAA",
+            "CAG",
+            "GAA",
+            "GAG"
         ]
     },
-    {
-        "table_id": "24",
+    "24": {
         "F": [
             "TTT",
             "TTC"
@@ -1972,10 +3464,98 @@ GENETIC_TABLE = """
             "GGC",
             "GGA",
             "GGG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "AGA",
+            "TAT",
+            "TAC",
+            "TAA",
+            "TAG",
+            "TGT",
+            "TGC",
+            "TGA",
+            "TGG",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CAA",
+            "CAG",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "AGG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "GAT",
+            "GAC",
+            "GAA",
+            "GAG",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "Z": [
+            "CAA",
+            "CAG",
+            "GAA",
+            "GAG"
         ]
     },
-    {
-        "table_id": "25",
+    "25": {
         "F": [
             "TTT",
             "TTC"
@@ -2081,10 +3661,98 @@ GENETIC_TABLE = """
         "E": [
             "GAA",
             "GAG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "TAT",
+            "TAC",
+            "TAA",
+            "TAG",
+            "TGT",
+            "TGC",
+            "TGA",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG",
+            "TGG",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CAA",
+            "CAG",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "GAT",
+            "GAC",
+            "GAA",
+            "GAG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "Z": [
+            "CAA",
+            "CAG",
+            "GAA",
+            "GAG"
         ]
     },
-    {
-        "table_id": "26",
+    "26": {
         "F": [
             "TTT",
             "TTC"
@@ -2190,10 +3858,97 @@ GENETIC_TABLE = """
             "GGC",
             "GGA",
             "GGG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "TAT",
+            "TAC",
+            "TAA",
+            "TAG",
+            "TGA",
+            "TGT",
+            "TGC",
+            "TGG",
+            "CTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CAA",
+            "CAG",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GAT",
+            "GAC",
+            "GAA",
+            "GAG",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "Z": [
+            "CAA",
+            "CAG",
+            "GAA",
+            "GAG"
         ]
     },
-    {
-        "table_id": "27",
+    "27": {
         "F": [
             "TTT",
             "TTC"
@@ -2297,10 +4052,100 @@ GENETIC_TABLE = """
             "GGC",
             "GGA",
             "GGG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "TAT",
+            "TAC",
+            "TAA",
+            "TAG",
+            "CAA",
+            "CAG",
+            "TGT",
+            "TGC",
+            "TGA",
+            "TGG",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "GAT",
+            "GAC",
+            "GAA",
+            "GAG",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "Z": [
+            "TAA",
+            "TAG",
+            "CAA",
+            "CAG",
+            "GAA",
+            "GAG"
         ]
     },
-    {
-        "table_id": "28",
+    "28": {
         "F": [
             "TTT",
             "TTC"
@@ -2404,10 +4249,100 @@ GENETIC_TABLE = """
             "GGC",
             "GGA",
             "GGG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "TAT",
+            "TAC",
+            "TAA",
+            "TAG",
+            "CAA",
+            "CAG",
+            "TGT",
+            "TGC",
+            "TGA",
+            "TGG",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "GAT",
+            "GAC",
+            "GAA",
+            "GAG",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "Z": [
+            "TAA",
+            "TAG",
+            "CAA",
+            "CAG",
+            "GAA",
+            "GAG"
         ]
     },
-    {
-        "table_id": "29",
+    "29": {
         "F": [
             "TTT",
             "TTC"
@@ -2513,10 +4448,98 @@ GENETIC_TABLE = """
             "GGC",
             "GGA",
             "GGG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "TAT",
+            "TAC",
+            "TAA",
+            "TAG",
+            "TGT",
+            "TGC",
+            "TGA",
+            "TGG",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CAA",
+            "CAG",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "GAT",
+            "GAC",
+            "GAA",
+            "GAG",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "Z": [
+            "CAA",
+            "CAG",
+            "GAA",
+            "GAG"
         ]
     },
-    {
-        "table_id": "30",
+    "30": {
         "F": [
             "TTT",
             "TTC"
@@ -2622,10 +4645,100 @@ GENETIC_TABLE = """
             "GGC",
             "GGA",
             "GGG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "TAT",
+            "TAC",
+            "TAA",
+            "TAG",
+            "GAA",
+            "GAG",
+            "TGT",
+            "TGC",
+            "TGA",
+            "TGG",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CAA",
+            "CAG",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "GAT",
+            "GAC",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "Z": [
+            "TAA",
+            "TAG",
+            "GAA",
+            "GAG",
+            "CAA",
+            "CAG"
         ]
     },
-    {
-        "table_id": "31",
+    "31": {
         "F": [
             "TTT",
             "TTC"
@@ -2729,10 +4842,100 @@ GENETIC_TABLE = """
             "GGC",
             "GGA",
             "GGG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "TAT",
+            "TAC",
+            "TAA",
+            "TAG",
+            "GAA",
+            "GAG",
+            "TGT",
+            "TGC",
+            "TGA",
+            "TGG",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CAA",
+            "CAG",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "GAT",
+            "GAC",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "Z": [
+            "TAA",
+            "TAG",
+            "GAA",
+            "GAG",
+            "CAA",
+            "CAG"
         ]
     },
-    {
-        "table_id": "32",
+    "32": {
         "F": [
             "TTT",
             "TTC"
@@ -2838,10 +5041,98 @@ GENETIC_TABLE = """
             "GGC",
             "GGA",
             "GGG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "TAT",
+            "TAC",
+            "TAA",
+            "TGA",
+            "TAG",
+            "TGG",
+            "TGT",
+            "TGC",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CAA",
+            "CAG",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "AGA",
+            "AGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "GAT",
+            "GAC",
+            "GAA",
+            "GAG",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "Z": [
+            "CAA",
+            "CAG",
+            "GAA",
+            "GAG"
         ]
     },
-    {
-        "table_id": "33",
+    "33": {
         "F": [
             "TTT",
             "TTC"
@@ -2947,31 +5238,110 @@ GENETIC_TABLE = """
             "GGC",
             "GGA",
             "GGG"
+        ],
+        "X": [
+            "TTT",
+            "TTC",
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "TCT",
+            "TCC",
+            "TCA",
+            "TCG",
+            "AGT",
+            "AGC",
+            "AGA",
+            "TAT",
+            "TAC",
+            "TAA",
+            "TAG",
+            "TGT",
+            "TGC",
+            "TGA",
+            "TGG",
+            "CCT",
+            "CCC",
+            "CCA",
+            "CCG",
+            "CAT",
+            "CAC",
+            "CAA",
+            "CAG",
+            "CGT",
+            "CGC",
+            "CGA",
+            "CGG",
+            "ATT",
+            "ATC",
+            "ATA",
+            "ATG",
+            "ACT",
+            "ACC",
+            "ACA",
+            "ACG",
+            "AAT",
+            "AAC",
+            "AAA",
+            "AAG",
+            "AGG",
+            "GTT",
+            "GTC",
+            "GTA",
+            "GTG",
+            "GCT",
+            "GCC",
+            "GCA",
+            "GCG",
+            "GAT",
+            "GAC",
+            "GAA",
+            "GAG",
+            "GGT",
+            "GGC",
+            "GGA",
+            "GGG"
+        ],
+        "B": [
+            "AAT",
+            "AAC",
+            "GAT",
+            "GAC"
+        ],
+        "J": [
+            "TTA",
+            "TTG",
+            "CTT",
+            "CTC",
+            "CTA",
+            "CTG",
+            "ATT",
+            "ATC",
+            "ATA"
+        ],
+        "Z": [
+            "CAA",
+            "CAG",
+            "GAA",
+            "GAG"
         ]
     }
-]
+}
 """
 
-
-def check_exists_tmp_create() -> str:
-    home_path = Path.home()
-    app_dir = home_path.joinpath(Path(".pal2nal"))
-
-    if not app_dir.exists():
-        app_dir.mkdir()
-
-    file_path = app_dir.joinpath(Path("genetic_table.json"))
-
-    file_path.write_text(GENETIC_TABLE)
-
-    return str(file_path)
+DICT_TABLES = json.loads(GENETIC_TABLE)
 
 
 def return_aligned_paths(
-    glob_paths_taxa: Generator[Path],
-    glob_paths_genes: Generator[Path],
+    glob_paths_taxa: List[Path],
+    glob_paths_genes: List[Path],
     path_aligned: Path,
-) -> Generator[Path]:
+    pr,
+    d,
+) -> Generator[Path, Any, Any]:
     for path_nt, path_aa in zip(glob_paths_taxa, glob_paths_genes):
         if not path_nt.is_file() or not path_aa.is_file():
             continue
@@ -2985,11 +5355,17 @@ def return_aligned_paths(
         yield (
             path_aa,
             path_nt,
-            path_aligned.joinpath(Path(f"{stem_taxon}.nt.fa"))
+            path_aligned.joinpath(Path(f"{stem_taxon}.nt.fa")),
+            pr,
+            d,
         )
 
 
-def prepare_taxa_and_genes(input: str) -> Generator[Tuple[Path, Path, Path]]:
+def prepare_taxa_and_genes(input: str, pr, d) -> Tuple[Generator[
+    Tuple[Path, Path, Path],
+    Any,
+    Any
+], int]:
     input_path = Path(input)
 
     joined_mafft = input_path.joinpath(Path("mafft"))
@@ -2999,37 +5375,42 @@ def prepare_taxa_and_genes(input: str) -> Generator[Tuple[Path, Path, Path]]:
     if not joined_nt_aligned.exists():
         joined_nt_aligned.mkdir()
 
-    glob_genes = joined_mafft.glob("*aa.fa")
-    glob_taxa = joined_nt.glob("*nt.fa")
+    glob_genes = sorted(list(joined_mafft.glob("*aa.fa")))
+    glob_taxa = sorted(list(joined_nt.glob("*nt.fa")))
 
     out_generator = return_aligned_paths(
         glob_taxa,
         glob_genes,
-        joined_nt_aligned
+        joined_nt_aligned,
+        pr,
+        d,
     )
 
-    return out_generator
+    return out_generator, len(glob_genes)
 
 
 def write_result_to_fasta_file(
-    file_name: str,
+    file_name: Path,
     seq_header_array: List[Tuple[str, str]],
 ):
-
     list_str = list(sum(seq_header_array, ()))
+
+    fin = [""]
+
+    def add_to_fin(it=None, l=""):
+        fin[0] += l
 
     def add_symbol(i: int) -> str:
         if i % 2 == 0:
-            list_str[i] = f">{list_str[i]}\n"
+            return f">{list_str[i]}\n"
         else:
-            list_str[i] = f"{list_str[i]}\n"
+            return f"{list_str[i]}\n"
 
-    list(map(add_symbol, range(len(list_str))))
+    reduce(add_to_fin, map(add_symbol, range(len(list_str))))
 
-    with open(file_name, "w") as fw:
-        fw.writelines(list_str)
+    fin, = fin
 
-    print(f"List of reverse-translated NTs written to: {file_name}")
+    file_name.write_text(fin)
 
     return None
 
@@ -3064,19 +5445,8 @@ def read_and_convert_fasta_files(
             nts_in_order[i] = nts[correct_header]
         except:
             print("ERROR CAUGHT: There is a single header in PEP sequence FASTA file that does not exist in NUC sequence FASTA file")
-            sys.exit()
 
     return (aas, nts_in_order)
-
-
-def convert_to_codon(
-    filepath: str,
-    table_index: int,
-    aa_seqs: List[Tuple[str, str]],
-    nt_seqs: List[Tuple[str, str]],
-    do_log: bool,
-):
-    return pn2codon(filepath, table_index, aa_seqs, nt_seqs, do_log)
 
 
 def init_argparse() -> argparse.ArgumentParser:
@@ -3089,9 +5459,26 @@ def init_argparse() -> argparse.ArgumentParser:
 
     parser.add_argument('-i', '--input', type=str, default='Parent',
                         help='Parent input path.')
-    parser.add_argument('-p', '--processes', type=int, default=0,
+    parser.add_argument('-pr', '--parallel', type=int, default=0,
+                        help='Parallel = 1; ST = 0.')
+    parser.add_argument('-p', '--processes', type=int, default=4,
                         help='Number of threads used to call processes.')
+    parser.add_argument('-t', '--table', type=int, default=1,
+                        help='Table ID.')
     return parser
+
+
+def worker(tup: Tuple[Path, Path, Path, int, Dict]):
+    aa_file, nt_file, out_file, pr, d = tup
+    aa_seq, nt_seq = read_and_convert_fasta_files(
+            aa_file,
+            nt_file
+    )
+
+    stem = out_file.stem
+    res = pn2codon(stem, d, aa_seq, nt_seq)
+    
+    out_file.write_text(res)
 
 
 def timeit(func):
@@ -3107,38 +5494,22 @@ def timeit(func):
     return timeit_wrapper
 
 
-def pal_to_nal(
-    input_triplet: Tuple[Path, Path, Path],
-    table_path=check_exists_tmp_create(),
-) -> None:
-    taxa_file, gene_file, out_file = input_triplet
-
-    aa_seqs, nt_seqs = read_and_convert_fasta_files(
-        str(gene_file),
-        str(taxa_file)
-    )
-
-    write_result_to_fasta_file(
-        str(out_file),
-        convert_to_codon(
-            filepath=table_path,
-            table_index=table_path,
-            aa_seqs=aa_seqs,
-            nt_seqs=nt_seqs,
-            do_log=False
-        ))
-
-
 @timeit
-def run_batch_threaded(input: str, num_threads: int):
-    generator = prepare_taxa_and_genes(input)
-
-    with ThreadPool(num_threads) as pool:
-        pool.map(pal_to_nal, generator, chunksize=1)
+def run_batch_threaded(num_threads: int, ls: List[
+        List[
+            List[Tuple[Tuple[Path, Path, Path], int, Dict]]
+        ]]):
+    
+    with Pool(num_threads) as pool:
+        list(pool.imap(worker, ls, chunksize=100))
 
 
 if __name__ == "__main__":
     arg_parser = init_argparse()
     args = arg_parser.parse_args()
 
-    run_batch_threaded(args.input, args.processes)
+    d = DICT_TABLES[str(args.table)]
+
+    generator, _ = prepare_taxa_and_genes(args.input, args.parallel, d)
+
+    run_batch_threaded(num_threads=args.processes, ls=generator)
