@@ -5477,7 +5477,7 @@ def worker(tup: Tuple[Path, Path, Path, int, Dict]):
 
     stem = out_file.stem
     res = pn2codon(stem, d, aa_seq, nt_seq)
-    
+
     out_file.write_text(res)
 
 
@@ -5501,7 +5501,7 @@ def run_batch_threaded(num_threads: int, ls: List[
         ]]):
     
     with Pool(num_threads) as pool:
-        list(pool.imap(worker, ls, chunksize=100))
+        list(pool.map(worker, ls, chunksize=100))
 
 
 if __name__ == "__main__":
