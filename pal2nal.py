@@ -1,9 +1,8 @@
 import argparse
 import json
-from multiprocessing import Pool
 import time
+from functools import wraps
 from multiprocessing import Pool
-from functools import reduce, wraps
 from pathlib import Path
 from typing import Any, Dict, Generator, List, Tuple
 
@@ -119,72 +118,7 @@ GENETIC_TABLE = """
             "GGA",
             "GGG"
         ],
-        "X": [
-            "TTT",
-            "TTC",
-            "TTA",
-            "TTG",
-            "CTT",
-            "CTC",
-            "CTA",
-            "CTG",
-            "TCT",
-            "TCC",
-            "TCA",
-            "TCG",
-            "AGT",
-            "AGC",
-            "TAT",
-            "TAC",
-            "TAA",
-            "TAG",
-            "TGA",
-            "TGT",
-            "TGC",
-            "TGG",
-            "CCT",
-            "CCC",
-            "CCA",
-            "CCG",
-            "CAT",
-            "CAC",
-            "CAA",
-            "CAG",
-            "CGT",
-            "CGC",
-            "CGA",
-            "CGG",
-            "AGA",
-            "AGG",
-            "ATT",
-            "ATC",
-            "ATA",
-            "ATG",
-            "ACT",
-            "ACC",
-            "ACA",
-            "ACG",
-            "AAT",
-            "AAC",
-            "AAA",
-            "AAG",
-            "GTT",
-            "GTC",
-            "GTA",
-            "GTG",
-            "GCT",
-            "GCC",
-            "GCA",
-            "GCG",
-            "GAT",
-            "GAC",
-            "GAA",
-            "GAG",
-            "GGT",
-            "GGC",
-            "GGA",
-            "GGG"
-        ],
+        "X": [],
         "B": [
             "AAT",
             "AAC",
@@ -316,72 +250,7 @@ GENETIC_TABLE = """
             "GGA",
             "GGG"
         ],
-        "X": [
-            "TTT",
-            "TTC",
-            "TTA",
-            "TTG",
-            "CTT",
-            "CTC",
-            "CTA",
-            "CTG",
-            "TCT",
-            "TCC",
-            "TCA",
-            "TCG",
-            "AGT",
-            "AGC",
-            "TAT",
-            "TAC",
-            "TAA",
-            "TAG",
-            "AGA",
-            "AGG",
-            "TGT",
-            "TGC",
-            "TGA",
-            "TGG",
-            "CCT",
-            "CCC",
-            "CCA",
-            "CCG",
-            "CAT",
-            "CAC",
-            "CAA",
-            "CAG",
-            "CGT",
-            "CGC",
-            "CGA",
-            "CGG",
-            "ATT",
-            "ATC",
-            "ATA",
-            "ATG",
-            "ACT",
-            "ACC",
-            "ACA",
-            "ACG",
-            "AAT",
-            "AAC",
-            "AAA",
-            "AAG",
-            "GTT",
-            "GTC",
-            "GTA",
-            "GTG",
-            "GCT",
-            "GCC",
-            "GCA",
-            "GCG",
-            "GAT",
-            "GAC",
-            "GAA",
-            "GAG",
-            "GGT",
-            "GGC",
-            "GGA",
-            "GGG"
-        ],
+        
         "B": [
             "AAT",
             "AAC",
@@ -1691,72 +1560,7 @@ GENETIC_TABLE = """
             "GGA",
             "GGG"
         ],
-        "X": [
-            "TTT",
-            "TTC",
-            "TTA",
-            "TTG",
-            "CTT",
-            "CTC",
-            "CTA",
-            "CTG",
-            "TCT",
-            "TCC",
-            "TCA",
-            "TCG",
-            "AGT",
-            "AGC",
-            "TAT",
-            "TAC",
-            "TAA",
-            "TAG",
-            "TGA",
-            "TGT",
-            "TGC",
-            "TGG",
-            "CCT",
-            "CCC",
-            "CCA",
-            "CCG",
-            "CAT",
-            "CAC",
-            "CAA",
-            "CAG",
-            "CGT",
-            "CGC",
-            "CGA",
-            "CGG",
-            "AGA",
-            "AGG",
-            "ATT",
-            "ATC",
-            "ATA",
-            "ATG",
-            "ACT",
-            "ACC",
-            "ACA",
-            "ACG",
-            "AAT",
-            "AAC",
-            "AAA",
-            "AAG",
-            "GTT",
-            "GTC",
-            "GTA",
-            "GTG",
-            "GCT",
-            "GCC",
-            "GCA",
-            "GCG",
-            "GAT",
-            "GAC",
-            "GAA",
-            "GAG",
-            "GGT",
-            "GGC",
-            "GGA",
-            "GGG"
-        ],
+        "X": [],
         "B": [
             "AAT",
             "AAC",
@@ -5339,7 +5143,6 @@ def return_aligned_paths(
     glob_paths_taxa: List[Path],
     glob_paths_genes: List[Path],
     path_aligned: Path,
-    pr,
     d,
 ) -> Generator[Path, Any, Any]:
     for path_nt, path_aa in zip(glob_paths_taxa, glob_paths_genes):
@@ -5356,12 +5159,11 @@ def return_aligned_paths(
             path_aa,
             path_nt,
             path_aligned.joinpath(Path(f"{stem_taxon}.nt.fa")),
-            pr,
             d,
         )
 
 
-def prepare_taxa_and_genes(input: str, pr, d) -> Tuple[Generator[
+def prepare_taxa_and_genes(input: str, d) -> Tuple[Generator[
     Tuple[Path, Path, Path],
     Any,
     Any
@@ -5382,37 +5184,11 @@ def prepare_taxa_and_genes(input: str, pr, d) -> Tuple[Generator[
         glob_taxa,
         glob_genes,
         joined_nt_aligned,
-        pr,
         d,
     )
 
     return out_generator, len(glob_genes)
 
-
-def write_result_to_fasta_file(
-    file_name: Path,
-    seq_header_array: List[Tuple[str, str]],
-):
-    list_str = list(sum(seq_header_array, ()))
-
-    fin = [""]
-
-    def add_to_fin(it=None, l=""):
-        fin[0] += l
-
-    def add_symbol(i: int) -> str:
-        if i % 2 == 0:
-            return f">{list_str[i]}\n"
-        else:
-            return f"{list_str[i]}\n"
-
-    reduce(add_to_fin, map(add_symbol, range(len(list_str))))
-
-    fin, = fin
-
-    file_name.write_text(fin)
-
-    return None
 
 
 def read_and_convert_fasta_files(
@@ -5459,8 +5235,6 @@ def init_argparse() -> argparse.ArgumentParser:
 
     parser.add_argument('-i', '--input', type=str, default='Parent',
                         help='Parent input path.')
-    parser.add_argument('-pr', '--parallel', type=int, default=0,
-                        help='Parallel = 1; ST = 0.')
     parser.add_argument('-p', '--processes', type=int, default=4,
                         help='Number of threads used to call processes.')
     parser.add_argument('-t', '--table', type=int, default=1,
@@ -5468,17 +5242,18 @@ def init_argparse() -> argparse.ArgumentParser:
     return parser
 
 
-def worker(tup: Tuple[Path, Path, Path, int, Dict]):
-    aa_file, nt_file, out_file, pr, d = tup
+def worker(tup: Tuple[Path, Path, Path, Dict]):
+    aa_file, nt_file, out_file, d = tup
     aa_seq, nt_seq = read_and_convert_fasta_files(
-            aa_file,
-            nt_file
+        aa_file,
+        nt_file
     )
 
     stem = out_file.stem
     res = pn2codon(stem, d, aa_seq, nt_seq)
 
-    out_file.write_text(res)
+    out_file.write_text(res)    
+
 
 
 def timeit(func):
@@ -5497,11 +5272,12 @@ def timeit(func):
 @timeit
 def run_batch_threaded(num_threads: int, ls: List[
         List[
-            List[Tuple[Tuple[Path, Path, Path], int, Dict]]
+            List[Tuple[Tuple[Path, Path, Path], Dict]]
         ]]):
-    
+
+
     with Pool(num_threads) as pool:
-        list(pool.map(worker, ls, chunksize=100))
+        list(pool.map(worker, ls, chunksize=1))
 
 
 if __name__ == "__main__":
@@ -5510,6 +5286,6 @@ if __name__ == "__main__":
 
     d = DICT_TABLES[str(args.table)]
 
-    generator, _ = prepare_taxa_and_genes(args.input, args.parallel, d)
+    generator, _ = prepare_taxa_and_genes(args.input, d)
 
     run_batch_threaded(num_threads=args.processes, ls=generator)

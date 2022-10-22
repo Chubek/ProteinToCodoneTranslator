@@ -1,2 +1,2 @@
-pro2codon==1.1.7
+pro2codon==1.1.8
 biopython
