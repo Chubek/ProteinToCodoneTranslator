@@ -3650,6 +3650,7 @@ def read_and_convert_fasta_files(
     aas = []
     nts = {}
 
+
     for i, (aa, nt) in enumerate(zip(aa_seqs, nt_seqs)):      
         aa_header, aa_seq = aa
         nt_header, nt_seq = nt
@@ -3657,7 +3658,10 @@ def read_and_convert_fasta_files(
         aa_header, aa_seq = aa_header.strip(), aa_seq.strip()
         nt_header, nt_seq = nt_header.strip(), nt_seq.strip()
 
-        nts[nt_header] = (nt_header, nt_seq)
+        if aa_header[-2:] == '.a':
+            break
+
+        nts[nt_header] = (i, nt_header, nt_seq)
         aas.append((aa_header, aa_seq))
 
 
