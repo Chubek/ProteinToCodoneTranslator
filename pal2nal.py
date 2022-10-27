@@ -3651,7 +3651,7 @@ def read_and_convert_fasta_files(
     nts = {}
 
 
-    for i, (aa, nt) in enumerate(zip(aa_seqs, nt_seqs)):      
+    for aa, nt in zip(aa_seqs, nt_seqs):
         aa_header, aa_seq = aa
         nt_header, nt_seq = nt
 
@@ -3659,22 +3659,33 @@ def read_and_convert_fasta_files(
         nt_header, nt_seq = nt_header.strip(), nt_seq.strip()
 
         if aa_header[-2:] == '.a':
+            print("- ", i)
             break
 
-        nts[nt_header] = (i, nt_header, nt_seq)
+        nts[nt_header] = (nt_header, nt_seq)
         aas.append((aa_header, aa_seq))
+
+        
+
+    
 
 
     ret = {}
+    
+    i = -1
 
-    for i, aa in enumerate(aas):
+    for aa in aas:
         try:
-            ret[aa[0]] = (aa, nts[aa[0]])
+            if aa[0] not in ret:
+                i += 1
+
+            ret[aa[0]] = (aa, (i, *nts[aa[0]]))
+            
+
         except:
             print("ERROR CAUGHT: There is a single header in PEP sequence FASTA file that does not exist in NUC sequence FASTA file")
 
             sys.exit()
-
     return ret
 
 
